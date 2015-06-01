@@ -1,0 +1,55 @@
+import java.util.ArrayList;
+
+
+public class Enrolment {
+	 private  ArrayList<Course> prereqs;
+	 private static   ArrayList<Course> enrolments = new ArrayList<Course>(4);
+	 private static ArrayList<Course> previousCourses = new ArrayList<Course>();
+	
+
+
+public static ArrayList<Course> getPreviousCourses() {
+		return previousCourses;
+	}
+public static void setPreviousCourses(Course C) {
+   previousCourses.add(C);
+ 
+	}
+
+public static  boolean confirmPrereqs (Course C){
+	
+	ArrayList<Course> PrereqsList = new ArrayList<Course>();
+
+	
+   if (getPreviousCourses().containsAll(PrereqsList)){
+	   
+	   return true;
+   }
+   
+   
+   else {
+	   return false ;
+			   
+   }
+
+}
+
+public static   void EnrolCourse (Course C){
+	
+	if(confirmPrereqs(C)== true){
+		
+		enrolments.add(C);
+		getPreviousCourses().add(C);
+		System.out.println ("The enrolment is sucessful");
+		
+	}
+	
+	else {
+		System.out.println ("The enrolment is unsucessful");
+	}
+		
+}
+	
+		
+		
+}
