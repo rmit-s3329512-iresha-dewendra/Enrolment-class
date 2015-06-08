@@ -1,0 +1,59 @@
+public class StudentTest {
+	public static void main(String[] args) {
+
+		Student student1 = new Student("Student one ", 5005, 3.90,
+				new UserData(85, 5, 5, 115));
+		Student student2 = new Student("Student two ", 5006, 2.80,
+				new UserData(86, 2, 4, 345));
+		Student student3 = new Student("Student three ", 5007, 3.30,
+				new UserData(87, 7, 6, 123));
+		Student student4 = new Student("Student four ", 5008, 2.20,
+				new UserData(90, 4, 12, 657));
+		
+	//	i). Students should prevent students from enrolling in more than 4 course offerings
+
+		Course course1 = new Course("Java", 4);
+
+		course1.enrollStudent(student1);
+		course1.enrollStudent(student2);
+		course1.enrollStudent(student3);
+		course1.enrollStudent(student4);
+
+		System.out.println(" Students are from App" + course1.getCourseName()
+				+ ": ");
+		course1.list();
+
+		course1.increaseCapacity();
+
+		course1.enrollStudent(student4);
+
+		System.out.println("Student of Course " + course1.getCourseName()
+				+ ": ");
+		course1.list();
+
+		course1.withdrawStudent(student1);
+
+		System.out.println(course1.getCourseName()
+				+ "'s number of students are " + course1.getNumberOfStudents()
+				+ ".");
+
+		Course course2 = new Course("Java", "TestC", "Java");
+		//ii) Students should not allow students to enrol into a course offering without the neccessary prerequisties.
+
+		Student[] students = course1.getStudents();
+		for (int i = 0; i < course1.getNumberOfStudents(); i++)
+			course2.enrollStudent(students[i]);
+
+		course1.clear();
+
+		System.out.println("\nAll students of " + course1.getCourseName()
+				+ ": ");
+		course1.list();
+		System.out.println("\nAll students of " + course2.getCourseName()
+				+ ": ");
+		course2.list();
+		//iii) System should prevent students from enrolling or withdrawing after the census date (USERS MUST BE ALLOWED TO VARY THE CENSUS DATE FOR TESTING PURPOSE)
+		Enrolment.withdraw(course1);
+		
+	}
+}
