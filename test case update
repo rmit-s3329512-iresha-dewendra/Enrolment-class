@@ -1,0 +1,51 @@
+package Code_final.SEF;
+/**
+ * Test.
+ */
+public class StudentTest {
+	public static void main(String[] args) {
+
+		Student student1 = new Student("Student one ", 5005, 3.90,
+				new UserData(85, 5, 5, 115));
+		Student student2 = new Student("Student two ", 5006, 2.80,
+				new UserData(86, 2, 4, 345));
+		Student student3 = new Student("Student three ", 5007, 3.30,
+				new UserData(87, 7, 6, 123));
+		Student student4 = new Student("Student four ", 5008, 2.20,
+				new UserData(90, 4, 12, 657));
+		
+	
+		Course course1 = new Course("Java", 4);
+		Course course2 = new Course ("Datbase",4);
+		Course course3 = new Course ("Software", 4);
+		Course course4 = new Course ("Computing" ,4);
+		Course course5 = new Course ("Communications",4);
+
+		Enrolment.EnrolCourse(course1);
+		Enrolment.EnrolCourse(course2);
+		Enrolment.EnrolCourse(course3);
+		Enrolment.EnrolCourse(course4);
+		Enrolment.EnrolCourse(course5);
+		
+//		i). System should prevent students from enrolling in more than 4 course offerings
+		if(Enrolment.getEnrollments() > 4){
+			System.out.println("You cannot enrol more than 4 courses");
+			Enrolment.withdraw(course5);
+		}
+		
+		
+		//ii) Students should not allow students to enrol into a course offering without the neccessary prerequisties.
+       if (Enrolment.confirmPrereqs(course1)== false){
+    	   System.out.println("You cannot enrol you dont meet prrequisties");
+    	   
+       }
+		
+		//iii) System should prevent students from enrolling or withdrawing after the census date 
+		if (Enrolment.withdraw(course1)== false){
+		System.out.println("Cannot withdraw census date is over");
+		
+		}
+		
+		
+	}
+}
