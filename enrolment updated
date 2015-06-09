@@ -1,0 +1,71 @@
+package Code_final.SEF;
+import java.util.ArrayList;
+import java.util.Date;
+
+public class Enrolment {
+	 private  ArrayList<Course> prereqs;
+	 private static   ArrayList<Course> enrolments = new ArrayList<Course>(4);
+	 private static ArrayList<Course> previousCourses = new ArrayList<Course>();
+	
+
+
+public static ArrayList<Course> getPreviousCourses() {
+		return previousCourses;
+	}
+public static void setPreviousCourses(Course C) {
+   previousCourses.add(C);
+ 
+	}
+
+public static  boolean confirmPrereqs (Course C){
+	
+	ArrayList<Course> PrereqsList = new ArrayList<Course>();
+    ArrayList<Course> Alist = new ArrayList<Course>();
+	
+    PrereqsList.addAll(Course.getPrereqs());
+    
+		if (previousCourses.containsAll(PrereqsList)){
+			return true ;
+		}
+
+   
+   else {
+	   return false ;
+			   
+   }
+
+}
+
+public static void EnrolCourse (Course C){
+	
+	if(confirmPrereqs(C)== true){
+		
+		enrolments.add(C);
+		getPreviousCourses().add(C);
+		System.out.println ("The enrolment is sucessful");
+		
+	}
+	
+	else {
+		System.out.println ("The enrolment is unsucessful");
+	}
+		
+}
+	
+public static boolean withdraw (Course C){		
+	
+	Date  todaydate= new Date ();
+	Date cdate=Course.getCensusDate();
+	
+	boolean withdarwVal = cdate.after(todaydate);
+	   System.out.println("Census date is over ");
+return withdarwVal ;
+	
+}
+
+public static int getEnrollments(){
+	
+	return enrolments.size();
+	
+}
+		
